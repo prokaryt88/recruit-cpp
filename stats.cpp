@@ -41,11 +41,24 @@ void
 Stats::calculate(const std::vector<int>& data) {
     // TODO: Implement this method
     // It should process the input vector and update sum, max, and avg
+    sum = 0;
+    max = INT_MIN;
+    for( auto & it : data){
+        sum += it;
+        max = (it > max) ? it : max;
+    }
+    avg  = static_cast<double>(sum) / static_cast<double>(data.size());
+
 }
 
 int main(int argc, char** argv) {
     std::vector<int> data;
     // Read integers from stdin into data until EOF or invalid input
+    std::copy(std::istream_iterator<int>(std::cin),
+        std::istream_iterator<int>(),
+        std::back_inserter(data)
+    );
+    
     // Exit with appropriate message if input is invalid
     Stats s(data);
     
